@@ -4,7 +4,7 @@
       <div class="footer-section brand-section">
         <div class="brand">
           <span class="heart">💕</span>
-          <span class="name">RomanceReads</span>
+          <span class="name">Amore Chapters</span>
         </div>
         <p class="tagline">Where every story finds its perfect match</p>
         <div class="social-links">
@@ -62,7 +62,7 @@
 
     <div class="footer-bottom">
       <div class="footer-bottom-content">
-        <p>&copy; 2025 RomanceReads. All rights reserved.</p>
+        <p>&copy; 2025 Amore Chapters. All rights reserved.</p>
         <p class="disclaimer">
           This is a demo application. All books and content are for demonstration purposes only.
         </p>
@@ -78,7 +78,7 @@
         </div>
         <div class="modal-content">
           <h4>1. Acceptance of Terms</h4>
-          <p>By using RomanceReads, you agree to be bound by these Terms and Conditions.</p>
+          <p>By using Amore Chapters, you agree to be bound by these Terms and Conditions.</p>
           
           <h4>2. Subscription Services</h4>
           <p>Our subscription plans provide access to digital romance books. Subscription fees are billed monthly or annually as selected.</p>
@@ -87,7 +87,7 @@
           <p>Users must not share account credentials, reproduce copyrighted content, or engage in harmful activities.</p>
           
           <h4>4. Intellectual Property</h4>
-          <p>All content on RomanceReads is protected by copyright and other intellectual property laws.</p>
+          <p>All content on Amore Chapters is protected by copyright and other intellectual property laws.</p>
           
           <h4>5. Cancellation and Refunds</h4>
           <p>You may cancel your subscription at any time. Refunds are provided according to our Refund Policy.</p>
@@ -96,7 +96,7 @@
           <p>Your privacy is important to us. Please review our Privacy Policy for details on data collection and use.</p>
           
           <h4>7. Limitation of Liability</h4>
-          <p>RomanceReads shall not be liable for any indirect, incidental, or consequential damages.</p>
+          <p>Amore Chapters shall not be liable for any indirect, incidental, or consequential damages.</p>
           
           <h4>8. Changes to Terms</h4>
           <p>We reserve the right to modify these terms at any time. Continued use constitutes acceptance of new terms.</p>
@@ -143,11 +143,11 @@ function openRefund() {
 }
 
 function openHelp() {
-  alert('Help Center: Contact our support team at help@romancereads.com for assistance with your account.')
+  alert('Help Center: Contact our support team at help@Amore Chapters.com for assistance with your account.')
 }
 
 function openContact() {
-  alert('Contact Us: Email us at hello@romancereads.com or call 1-800-ROMANCE for customer support.')
+  alert('Contact Us: Email us at hello@Amore Chapters.com or call 1-800-ROMANCE for customer support.')
 }
 
 function openFAQ() {
@@ -155,7 +155,7 @@ function openFAQ() {
 }
 
 function openBugReport() {
-  alert('Report a Bug: Help us improve! Send bug reports to bugs@romancereads.com')
+  alert('Report a Bug: Help us improve! Send bug reports to bugs@Amore Chapters.com')
 }
 
 function openNewReleases() {

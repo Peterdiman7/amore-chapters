@@ -4,7 +4,7 @@
       <div class="brand">
         <RouterLink to="/" class="logo">
           <span class="heart">💕</span>
-          RomanceReads
+          Amore Chapters
         </RouterLink>
       </div>
       
