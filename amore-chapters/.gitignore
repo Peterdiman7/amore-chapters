@@ -27,4 +27,12 @@ coverage
 *.sln
 *.sw?
 
-*.tsbuildinfo
+# Test project files
+src/components/Test*
+src/components/Temp*
+src/views/Test*
+src/views/Temp*
+src/generated/**
+
+# Backup files
+src/**/*.bak
