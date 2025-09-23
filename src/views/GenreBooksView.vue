@@ -2,11 +2,7 @@
   <div class="collection">
     <h2>{{ name }} Books</h2>
     <div class="grid">
-      <div 
-        v-for="book in filteredBooks" 
-        :key="book.id" 
-        class="card"
-      >
+      <div v-for="book in filteredBooks" :key="book.id" class="card">
         <img :src="book.cover" :alt="book.title" />
         <h3>{{ book.title }}</h3>
         <p class="author">by {{ book.author }}</p>
@@ -44,15 +40,16 @@ h2 {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 400px));
   gap: 1.5rem;
+  justify-content: center;
 }
 
 .card {
   background: #fff0f3;
   border-radius: 12px;
   padding: 1rem;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .card img {

@@ -7,20 +7,20 @@
           <span class="name">Amore Chapters</span>
         </div>
         <p class="tagline">Where every story finds its perfect match</p>
-        <div class="social-links">
-          <a href="#" class="social-link" aria-label="Facebook">📘</a>
-          <a href="#" class="social-link" aria-label="Twitter">🐦</a>
-          <a href="#" class="social-link" aria-label="Instagram">📷</a>
-          <a href="#" class="social-link" aria-label="TikTok">🎵</a>
-        </div>
       </div>
 
       <div class="footer-section">
         <h4>Explore</h4>
         <ul>
-          <li><RouterLink to="/categories">Browse Genres</RouterLink></li>
-          <li><RouterLink to="/collection">Book Collection</RouterLink></li>
-          <li><RouterLink to="/plans">Subscription Plans</RouterLink></li>
+          <li>
+            <RouterLink to="/categories">Browse Genres</RouterLink>
+          </li>
+          <li>
+            <RouterLink to="/collection">Book Collection</RouterLink>
+          </li>
+          <li>
+            <RouterLink to="/plans">Subscription Plans</RouterLink>
+          </li>
           <li><a href="#" @click="openNewReleases">New Releases</a></li>
         </ul>
       </div>
@@ -28,20 +28,15 @@
       <div class="footer-section">
         <h4>Support</h4>
         <ul>
-          <li><a href="#" @click="openHelp">Help Center</a></li>
-          <li><a href="#" @click="openContact">Contact Us</a></li>
-          <li><a href="#" @click="openFAQ">FAQ</a></li>
-          <li><a href="#" @click="openBugReport">Report a Bug</a></li>
+          <li><a href="#" @click="navigate('contacts')">Contact Us</a></li>
         </ul>
       </div>
 
       <div class="footer-section">
         <h4>Legal</h4>
         <ul>
-          <li><a href="#" @click="openTerms">Terms & Conditions</a></li>
-          <li><a href="#" @click="openPrivacy">Privacy Policy</a></li>
-          <li><a href="#" @click="openCookies">Cookie Policy</a></li>
-          <li><a href="#" @click="openRefund">Refund Policy</a></li>
+          <li><a href="#" @click="navigate('terms-conditions')">Terms & Conditions</a></li>
+          <li><a href="#" @click="navigate('privacy-policy')">Privacy Policy</a></li>
         </ul>
       </div>
 
@@ -49,12 +44,7 @@
         <h4>Newsletter</h4>
         <p>Get the latest romance recommendations delivered to your inbox</p>
         <form class="newsletter-form" @submit.prevent="subscribeNewsletter">
-          <input 
-            type="email" 
-            placeholder="Enter your email"
-            v-model="email"
-            required
-          />
+          <input type="email" placeholder="Enter your email" v-model="email" required />
           <button type="submit">💌 Subscribe</button>
         </form>
       </div>
@@ -79,28 +69,32 @@
         <div class="modal-content">
           <h4>1. Acceptance of Terms</h4>
           <p>By using Amore Chapters, you agree to be bound by these Terms and Conditions.</p>
-          
+
           <h4>2. Subscription Services</h4>
-          <p>Our subscription plans provide access to digital romance books. Subscription fees are billed monthly or annually as selected.</p>
-          
+          <p>Our subscription plans provide access to digital romance books. Subscription fees are billed monthly or
+            annually as selected.</p>
+
           <h4>3. User Conduct</h4>
-          <p>Users must not share account credentials, reproduce copyrighted content, or engage in harmful activities.</p>
-          
+          <p>Users must not share account credentials, reproduce copyrighted content, or engage in harmful activities.
+          </p>
+
           <h4>4. Intellectual Property</h4>
           <p>All content on Amore Chapters is protected by copyright and other intellectual property laws.</p>
-          
+
           <h4>5. Cancellation and Refunds</h4>
           <p>You may cancel your subscription at any time. Refunds are provided according to our Refund Policy.</p>
-          
+
           <h4>6. Privacy</h4>
-          <p>Your privacy is important to us. Please review our Privacy Policy for details on data collection and use.</p>
-          
+          <p>Your privacy is important to us. Please review our Privacy Policy for details on data collection and use.
+          </p>
+
           <h4>7. Limitation of Liability</h4>
           <p>Amore Chapters shall not be liable for any indirect, incidental, or consequential damages.</p>
-          
+
           <h4>8. Changes to Terms</h4>
-          <p>We reserve the right to modify these terms at any time. Continued use constitutes acceptance of new terms.</p>
-          
+          <p>We reserve the right to modify these terms at any time. Continued use constitutes acceptance of new terms.
+          </p>
+
           <p class="effective-date"><strong>Effective Date:</strong> September 16, 2025</p>
         </div>
       </div>
@@ -108,9 +102,12 @@
   </footer>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
-import { RouterLink } from 'vue-router'
+
+import { RouterLink, useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const email = ref('')
 const showTermsModal = ref(false)
@@ -142,20 +139,8 @@ function openRefund() {
   alert('Refund Policy: Full refunds available within 30 days of purchase. Pro-rated refunds for annual subscriptions.')
 }
 
-function openHelp() {
-  alert('Help Center: Contact our support team at help@Amore Chapters.com for assistance with your account.')
-}
-
-function openContact() {
-  alert('Contact Us: Email us at hello@Amore Chapters.com or call 1-800-ROMANCE for customer support.')
-}
-
-function openFAQ() {
-  alert('FAQ: Find answers to common questions about subscriptions, reading, and account management.')
-}
-
-function openBugReport() {
-  alert('Report a Bug: Help us improve! Send bug reports to bugs@Amore Chapters.com')
+const navigate = (name: string) => {
+  router.push({ name })
 }
 
 function openNewReleases() {

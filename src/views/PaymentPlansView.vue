@@ -7,12 +7,7 @@
 
     <div class="plans-container">
       <div class="plans-grid">
-        <div 
-          v-for="(plan, index) in plans" 
-          :key="plan.id" 
-          class="plan-card"
-          :class="{ featured: plan.featured }"
-        >
+        <div v-for="(plan, index) in plans" :key="plan.id" class="plan-card" :class="{ featured: plan.featured }">
           <div class="plan-header">
             <h3>{{ plan.name }}</h3>
             <div class="price">
@@ -30,11 +25,7 @@
             </li>
           </ul>
 
-          <button 
-            class="plan-btn"
-            :class="{ featured: plan.featured }"
-            @click="selectPlan(plan)"
-          >
+          <button class="plan-btn" :class="{ featured: plan.featured }" @click="selectPlan(plan)">
             {{ plan.buttonText }}
           </button>
 
@@ -73,37 +64,51 @@
 const plans = [
   {
     id: 1,
-    name: "Free Reader",
-    price: 0,
-    period: "forever",
-    description: "Perfect for casual readers just getting started",
-    buttonText: "Get Started Free",
+    name: "Casual Reader",
+    price: 1.99,
+    period: "month",
+    description: "Perfect for occasional readers",
+    buttonText: "Start Reading",
     featured: false,
     features: [
       "Access to 5 books per month",
-      "Basic book recommendations",
-      "Standard support",
-      "Mobile app access"
+      "Basic recommendations",
+      "Standard support"
     ]
   },
   {
     id: 2,
-    name: "Book Lover",
-    price: 9.99,
+    name: "Romantic Explorer",
+    price: 4.99,
     period: "month",
-    description: "Great for regular readers who want more variety",
+    description: "Great for regular romance readers",
     buttonText: "Start Free Trial",
     featured: false,
     features: [
-      "Access to 25 books per month",
+      "Access to 15 books per month",
       "Personalized recommendations",
       "Offline reading",
-      "Priority support",
-      "Early access to new releases"
+      "Priority support"
     ]
   },
   {
     id: 3,
+    name: "Love Enthusiast",
+    price: 9.99,
+    period: "month",
+    description: "Ideal for romance lovers wanting more",
+    buttonText: "Start Free Trial",
+    featured: false,
+    features: [
+      "Access to 30 books per month",
+      "AI-powered recommendations",
+      "Offline reading",
+      "Premium support",
+      "Early access to new releases"
+    ]
+  },
+  {
+    id: 4,
     name: "Romance Addict",
     price: 19.99,
     period: "month",
@@ -121,7 +126,7 @@ const plans = [
     ]
   },
   {
-    id: 4,
+    id: 5,
     name: "Annual Lover",
     price: 199.99,
     period: "year",
@@ -131,7 +136,7 @@ const plans = [
     features: [
       "Everything in Romance Addict",
       "2 months free (save $40)",
-      "Exclusive annual member perks",
+      "Exclusive annual perks",
       "Priority customer support",
       "Special edition book covers",
       "Annual reader awards"
@@ -140,13 +145,14 @@ const plans = [
 ]
 
 function selectPlan(plan) {
-  if (plan.price === 0) {
+  if (plan.price < 1) {
     alert(`Welcome to ${plan.name}! You're all set to start reading! ✨`)
   } else {
-    alert(`Starting your 7-day free trial for ${plan.name}! After that, you'll be charged $${plan.price}/${plan.period}. 💕`)
+    alert(`Starting your subscription for ${plan.name} at $${plan.price}/${plan.period}! 💕`)
   }
 }
 </script>
+
 
 <style scoped>
 .plans-page {
@@ -184,7 +190,12 @@ function selectPlan(plan) {
   margin-bottom: 4rem;
 }
 
+
 .plan-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* push the button to bottom */
   background: white;
   border-radius: 16px;
   padding: 2rem;
@@ -263,6 +274,7 @@ function selectPlan(plan) {
 .features {
   list-style: none;
   margin-bottom: 2rem;
+  flex-grow: 1;
 }
 
 .feature {
@@ -280,6 +292,7 @@ function selectPlan(plan) {
 }
 
 .plan-btn {
+  margin-top: auto;
   width: 100%;
   padding: 1rem;
   border: none;
