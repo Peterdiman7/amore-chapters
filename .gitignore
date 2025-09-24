@@ -36,3 +36,4 @@ src/generated/**
 
 # Backup files
 src/**/*.bak
+.env

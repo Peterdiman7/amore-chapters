@@ -1,13 +1,12 @@
-import createRouter from "@/router";
-import pinia from "./pinia";
-
-import { type App } from "vue";
+import type { App } from "vue"
+import { createPinia } from "pinia"
+import createRouter from "@/router"
 
 export const registerPlugins = (app: App): Promise<void> => {
     return new Promise<void>((resolve) => {
-        app.use(createRouter())
+        const pinia = createPinia()
         app.use(pinia)
-
+        app.use(createRouter())
         resolve()
     })
 }

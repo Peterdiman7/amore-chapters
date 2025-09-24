@@ -4,8 +4,8 @@
       <h1>Login</h1>
       <form @submit.prevent="login">
         <div class="form-group">
-          <label>Email</label>
-          <input type="email" v-model="email" required />
+          <label>Username</label>
+          <input type="text" v-model="username" required />
         </div>
         <div class="form-group">
           <label>Password</label>
@@ -13,7 +13,16 @@
         </div>
         <button class="btn" type="submit">Login</button>
       </form>
+
+      <!-- Error and success messages -->
       <p v-if="error" class="error">{{ error }}</p>
+      <p v-if="success" class="success">{{ success }}</p>
+
+      <!-- Registration link -->
+      <p class="register-link">
+        No account?
+        <router-link to="/register">Register here</router-link>
+      </p>
     </div>
   </div>
 </template>
@@ -21,25 +30,48 @@
 <script setup lang="ts">
 import { ref } from "vue"
 import { useRouter } from "vue-router"
+import { useAuthStore } from "@/stores/auth"
 
-const email = ref("")
+const username = ref("")
 const password = ref("")
 const error = ref("")
+const success = ref("")
 const router = useRouter()
+const authStore = useAuthStore()
 
-const login = () => {
-  if (email.value === "lebowski@gmail.com" && password.value === "123") {
-    sessionStorage.setItem("loggedIn", "true")
+const login = async () => {
+  error.value = ""
+  success.value = ""
 
-    // 👇 notify other components (like Header) immediately
-    window.dispatchEvent(new Event("storage"))
+  try {
+    const response = await fetch("http://localhost:3000/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include", // important to send/receive cookies
+      body: JSON.stringify({
+        username: username.value,
+        password: password.value
+      })
+    })
 
-    router.push("/")
-  } else {
-    error.value = "Invalid credentials"
+    const data = await response.json()
+
+    if (!response.ok) {
+      error.value = data.error || "Login failed"
+      return
+    }
+
+    success.value = data.message || "Login successful"
+
+    await authStore.checkLogin()
+
+    setTimeout(() => {
+      router.push("/")
+    }, 1000)
+  } catch (err) {
+    error.value = "Network error"
   }
 }
-
 </script>
 
 <style scoped>
@@ -92,5 +124,27 @@ input {
 .error {
   color: red;
   margin-top: 1rem;
+}
+
+.success {
+  color: green;
+  margin-top: 1rem;
+}
+
+.register-link {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #555;
+  text-align: center;
+}
+
+.register-link a {
+  color: #14b8a6;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.register-link a:hover {
+  text-decoration: underline;
 }
 </style>

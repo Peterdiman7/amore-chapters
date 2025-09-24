@@ -54,12 +54,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, onMounted } from "vue"
+import { useRouter } from "vue-router"
+import { useAuthStore } from "@/stores/auth"
+import { storeToRefs } from "pinia"
 
 const router = useRouter()
+const auth = useAuthStore()
+const { loggedIn } = storeToRefs(auth)
+
 const menuOpen = ref(false)
-const loggedIn = ref(sessionStorage.getItem("loggedIn") === "true")
 
 const toggleMenu = () => {
   menuOpen.value = !menuOpen.value
@@ -71,29 +75,14 @@ const closeMenu = () => {
   document.body.style.overflow = ""
 }
 
-const handleResize = () => {
-  if (window.innerWidth > 768) closeMenu()
-}
-
-onMounted(() => {
-  window.addEventListener("resize", handleResize)
-  window.addEventListener("storage", syncLoginState)
-})
-
-onBeforeUnmount(() => {
-  window.removeEventListener("resize", handleResize)
-  window.removeEventListener("storage", syncLoginState)
-})
-
-const logout = () => {
-  sessionStorage.removeItem("loggedIn")
-  loggedIn.value = false
+const logout = async () => {
+  await auth.logout()
   router.push("/login")
 }
 
-const syncLoginState = () => {
-  loggedIn.value = sessionStorage.getItem("loggedIn") === "true"
-}
+onMounted(() => {
+  auth.checkLogin() // initial check from backend
+})
 </script>
 
 <style scoped>

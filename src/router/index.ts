@@ -6,13 +6,14 @@ import LoginView from "@/views/LoginView.vue"
 import MyCollectionView from "@/views/MyCollectionView.vue"
 import PaymentPlansView from "@/views/PaymentPlansView.vue"
 import PrivacyPolicyView from "@/views/PrivacyPolicyView.vue"
+import RegisterView from "@/views/RegisterView.vue"
 import TermsConditionsView from "@/views/TermsConditionsView.vue"
 
 import { createRouter as createVueRouter, createWebHistory } from "vue-router"
 
 import type { RouteLocationNamedRaw } from "vue-router"
 
-export const rootRoute: RouteLocationNamedRaw = { name: "landing" }
+export const rootRoute: RouteLocationNamedRaw = { name: "home" }
 
 const createRouter = () => {
     const router = createVueRouter({
@@ -20,7 +21,7 @@ const createRouter = () => {
         routes: [
             {
                 path: "/",
-                name: "landing",
+                name: "home",
                 component: LandingPageView,
             },
             {
@@ -49,6 +50,13 @@ const createRouter = () => {
                 path: "/login",
                 name: "login",
                 component: LoginView,
+                meta: { requiresGuest: true },
+            },
+            {
+                path: "/register",
+                name: "register",
+                component: RegisterView,
+                meta: { requiresGuest: true },
             },
             {
                 path: "/contacts",
@@ -68,12 +76,28 @@ const createRouter = () => {
         ],
     })
 
-    router.beforeEach((to, _from, next) => {
-        const loggedIn = sessionStorage.getItem("loggedIn") === "true"
-        // use matched.some to handle nested routes safely
+    // Global route guard
+    router.beforeEach(async (to, _from, next) => {
         const requiresAuth = to.matched.some(record => (record.meta as any)?.requiresAuth === true)
+        const requiresGuest = to.matched.some(record => (record.meta as any)?.requiresGuest === true)
+
+        let loggedIn = false
+
+        try {
+            const res = await fetch("http://localhost:3000/auth/me", {
+                credentials: "include"
+            })
+            loggedIn = res.ok
+        } catch (err) {
+            loggedIn = false
+        }
+
         if (requiresAuth && !loggedIn) {
+            // Not logged in → redirect to login
             next({ name: "login" })
+        } else if (requiresGuest && loggedIn) {
+            // Logged in → redirect to home
+            next({ name: "home" })
         } else {
             next()
         }
