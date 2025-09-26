@@ -10,20 +10,34 @@ dotenv.config()
 
 const app = express()
 
+// CORS configuration
+const allowedOrigins = [
+    "https://amore-chapters.com",
+    "http://localhost:9000",
+    "http://localhost:5173"
+]
+
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, origin)
+        } else {
+            callback(new Error("Not allowed by CORS"))
+        }
+    },
     credentials: true
 }))
+
 app.use(express.json())
 app.use(cookieParser())
 
 // ---- MYSQL CONNECTION ----
 const conn = await mysql.createConnection({
-    host: process.env.DB_HOST || "127.0.0.1",
-    user: process.env.DB_USER || "amore_chapters",
-    port: Number(process.env.DB_PORT) || 3307,
-    password: process.env.DB_PASS || "svs442dR__F",
-    database: process.env.DB_NAME || "amore_chapters"
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    port: Number(process.env.DB_PORT) || 3306,
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME
 })
 
 // ---- JWT SECRET ----
@@ -121,6 +135,6 @@ app.post("/auth/logout", (req, res) => {
 })
 
 // ---- START SERVER ----
-app.listen(3000, () => {
-    console.log("API running on http://localhost:3000")
+app.listen(9103, () => {
+    console.log("API running on http://localhost:9103")
 })
