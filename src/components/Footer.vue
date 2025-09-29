@@ -29,6 +29,7 @@
         <h4>Support</h4>
         <ul>
           <li><a href="#" @click="navigate('contacts')">Contact Us</a></li>
+          <li><a href="#" @click="navigate('cancel-subscription')">Cancel Subscription</a></li>
         </ul>
       </div>
 
