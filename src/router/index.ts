@@ -1,3 +1,4 @@
+import CancelSubscriptionView from "@/views/CancelSubscriptionView.vue"
 import CategoriesView from "@/views/CategoriesView.vue"
 import ContactsView from "@/views/ContactsView.vue"
 import GenreBooksView from "@/views/GenreBooksView.vue"
@@ -64,6 +65,11 @@ const createRouter = () => {
                 component: ContactsView,
             },
             {
+                path: "/cancel-subscription",
+                name: "cancel-subscription",
+                component: CancelSubscriptionView,
+            },
+            {
                 path: "/privacy-policy",
                 name: "privacy-policy",
                 component: PrivacyPolicyView,
@@ -84,7 +90,7 @@ const createRouter = () => {
         let loggedIn = false
 
         try {
-            const res = await fetch("http://localhost:3000/auth/me", {
+            const res = await fetch("https://back.amore-chapters.com/auth/me", {
                 credentials: "include"
             })
             loggedIn = res.ok

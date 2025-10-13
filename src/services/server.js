@@ -1,3 +1,4 @@
+import path from "path"
 import express from "express"
 import mysql from "mysql2/promise"
 import cors from "cors"
@@ -6,24 +7,41 @@ import jwt from "jsonwebtoken"
 import cookieParser from "cookie-parser"
 import dotenv from "dotenv"
 
-dotenv.config()
+dotenv.config({ path: path.resolve("/home/devalex/amore-chapters.com/amore-chapters/.env") })
 
 const app = express()
 
+// ---- CORS configuration ----
+const allowedOrigins = [
+    "https://amore-chapters.com",
+    "http://localhost:9000",
+    "http://localhost:5173"
+]
+
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, origin)
+        } else {
+            callback(new Error("Not allowed by CORS"))
+        }
+    },
     credentials: true
 }))
+
 app.use(express.json())
 app.use(cookieParser())
 
-// ---- MYSQL CONNECTION ----
-const conn = await mysql.createConnection({
+// ---- MYSQL POOL (auto reconnect) ----
+const pool = mysql.createPool({
     host: process.env.DB_HOST || "127.0.0.1",
-    user: process.env.DB_USER || "amore_chapters",
-    port: Number(process.env.DB_PORT) || 3307,
-    password: process.env.DB_PASS || "svs442dR__F",
-    database: process.env.DB_NAME || "amore_chapters"
+    user: process.env.DB_USER,
+    port: Number(process.env.DB_PORT) || 3306, // use 3307 only if SSH tunnel
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME,
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
 })
 
 // ---- JWT SECRET ----
@@ -43,7 +61,7 @@ app.post("/auth/register", async (req, res) => {
 
     try {
         const hashedPassword = await bcrypt.hash(password, 10)
-        await conn.execute(
+        await pool.execute(
             "INSERT INTO users (username, email, password) VALUES (?, ?, ?)",
             [username, email, hashedPassword]
         )
@@ -64,7 +82,7 @@ app.post("/auth/login", async (req, res) => {
     const { username, password } = req.body
 
     try {
-        const [rows] = await conn.execute(
+        const [rows] = await pool.execute(
             "SELECT * FROM users WHERE username = ?",
             [username]
         )
@@ -121,6 +139,6 @@ app.post("/auth/logout", (req, res) => {
 })
 
 // ---- START SERVER ----
-app.listen(3000, () => {
-    console.log("API running on http://localhost:3000")
+app.listen(9100, () => {
+    console.log("API running on http://localhost:9100")
 })

@@ -14,6 +14,7 @@ export default defineConfig({
     },
   },
   server: {
+    port: 9000,
     allowedHosts: [
       'amore-chapters.com',
     ],
