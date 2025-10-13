@@ -3,7 +3,7 @@
         <div class="container">
             <h1 class="page-title">Cancel Subscription</h1>
             <p class="page-intro">
-                We’re sorry to see you go 💔 Please fill out the form below to confirm your cancellation.
+                We’re sorry to see you go! Please fill out the form below to confirm your cancellation.
             </p>
 
             <form class="cancel-form" @submit.prevent="submitCancellation">
@@ -40,7 +40,7 @@
                 </div>
 
                 <!-- Button -->
-                <button type="submit" class="btn-submit">🚪 Submit & Cancel</button>
+                <button type="submit" class="btn-submit">Submit & Cancel</button>
             </form>
         </div>
     </section>
@@ -66,7 +66,6 @@ function submitCancellation() {
 <style scoped>
 .cancel-page {
     padding: 3rem 1.5rem;
-    background: #fff0f3;
 }
 
 .container {
@@ -81,7 +80,7 @@ function submitCancellation() {
 .page-title {
     font-size: 2rem;
     font-weight: 700;
-    color: #be123c;
+    color: #966AEC;
     margin-bottom: 1rem;
     text-align: center;
 }
@@ -107,7 +106,7 @@ function submitCancellation() {
 
 .cancel-form label {
     font-weight: 600;
-    color: #9f1239;
+    color: #966AEC;
 }
 
 .cancel-form input,
@@ -123,13 +122,13 @@ function submitCancellation() {
 .cancel-form input:focus,
 .cancel-form select:focus,
 .cancel-form textarea:focus {
-    border-color: #be123c;
+    border-color: #963AEC;
     box-shadow: 0 0 0 3px rgba(190, 18, 60, 0.15);
     outline: none;
 }
 
 .btn-submit {
-    background: #be123c;
+    background: #966AEC;
     color: white;
     font-weight: 600;
     padding: 0.9rem 1.5rem;
@@ -141,7 +140,7 @@ function submitCancellation() {
 }
 
 .btn-submit:hover {
-    background: #9f1239;
+    background: #963AEC;
     transform: translateY(-1px);
 }
 </style>

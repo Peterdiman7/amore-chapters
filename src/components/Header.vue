@@ -3,7 +3,6 @@
     <nav class="nav">
       <!-- Logo -->
       <router-link to="/" class="logo" @click="closeMenu">
-        <span class="logo-icon">💕</span>
         <span class="logo-text">Amore Chapters</span>
       </router-link>
 
@@ -11,29 +10,29 @@
       <ul class="nav-links" :class="{ open: menuOpen }">
         <li>
           <router-link to="/" @click="closeMenu" class="nav-link">
-            <span class="link-icon">🏠</span> Home
+            <span class="link-icon">Home</span>
           </router-link>
         </li>
         <li>
           <router-link to="/categories" @click="closeMenu" class="nav-link">
-            <span class="link-icon">📚</span> Browse Genres
+            <span class="link-icon">Browse Genres</span>
           </router-link>
         </li>
         <li>
           <router-link to="/collection" @click="closeMenu" class="nav-link">
-            <span class="link-icon">📖</span> Collection
+            <span class="link-icon">Collection</span>
           </router-link>
         </li>
         <li>
           <router-link to="/plans" @click="closeMenu" class="nav-link">
-            <span class="link-icon">💌</span> Plans
+            <span class="link-icon">Plans</span>
           </router-link>
         </li>
 
         <!-- Login / Logout -->
         <li v-if="!loggedIn">
           <router-link to="/login" @click="closeMenu" class="nav-link">
-            <span class="link-icon">🔑</span> Login
+            <span class="link-icon">Login</span>
           </router-link>
         </li>
         <li v-else>
@@ -89,7 +88,7 @@ onMounted(() => {
 /* ===== Header Layout ===== */
 .site-header {
   width: 100%;
-  background: linear-gradient(135deg, #be123c, #e11d48);
+  background: linear-gradient(135deg, #ffffff,#966AEC, #966AEC);
   position: sticky;
   top: 0;
   z-index: 200;
@@ -202,7 +201,7 @@ onMounted(() => {
     right: 0;
     flex-direction: column;
     align-items: flex-start;
-    background: linear-gradient(135deg, #be123c, #e11d48);
+    background: linear-gradient(135deg, #ffffff,#966AEC, #966AEC);
     width: 80%;
     max-width: 320px;
     height: 100vh;

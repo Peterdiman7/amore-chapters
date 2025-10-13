@@ -11,7 +11,7 @@
           <label>Password</label>
           <input type="password" v-model="password" required />
         </div>
-        <button class="btn" type="submit">Login</button>
+        <button style="background-color: #966AEC;" class="btn" type="submit">Login</button>
       </form>
 
       <!-- Error and success messages -->
@@ -139,7 +139,7 @@ input {
 }
 
 .register-link a {
-  color: #14b8a6;
+  color: #966AEC;
   font-weight: bold;
   text-decoration: none;
 }

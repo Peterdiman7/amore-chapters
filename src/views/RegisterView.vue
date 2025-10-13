@@ -122,7 +122,7 @@ input {
     padding: 0.8rem 1.5rem;
     border: none;
     border-radius: 8px;
-    background-color: #14b8a6;
+    background-color: #966AEC;
     color: white;
     font-weight: bold;
     cursor: pointer;
@@ -130,7 +130,7 @@ input {
 }
 
 .btn:hover {
-    background-color: #0f766e;
+    background-color: #9651EC;
 }
 
 .success {
@@ -151,7 +151,7 @@ input {
 }
 
 .login-link a {
-    color: #14b8a6;
+    color: #966AEC;
     font-weight: bold;
     text-decoration: none;
 }

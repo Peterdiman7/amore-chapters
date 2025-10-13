@@ -3,7 +3,7 @@
     <div class="footer-content">
       <div class="footer-section brand-section">
         <div class="brand">
-          <span class="heart">💕</span>
+          <span class="heart"></span>
           <span class="name">Amore Chapters</span>
         </div>
         <p class="tagline">Where every story finds its perfect match</p>
@@ -11,7 +11,7 @@
 
       <div class="footer-section">
         <h4>Explore</h4>
-        <ul>
+        <ul style="padding: 0;">
           <li>
             <RouterLink to="/categories">Browse Genres</RouterLink>
           </li>
@@ -27,7 +27,7 @@
 
       <div class="footer-section">
         <h4>Support</h4>
-        <ul>
+        <ul style="padding: 0;">
           <li><a href="#" @click="navigate('contacts')">Contact Us</a></li>
           <li><a href="#" @click="navigate('cancel-subscription')">Cancel Subscription</a></li>
         </ul>
@@ -35,7 +35,7 @@
 
       <div class="footer-section">
         <h4>Legal</h4>
-        <ul>
+        <ul style="padding: 0;">
           <li><a href="#" @click="navigate('terms-conditions')">Terms & Conditions</a></li>
           <li><a href="#" @click="navigate('privacy-policy')">Privacy Policy</a></li>
         </ul>
@@ -43,10 +43,10 @@
 
       <div class="footer-section">
         <h4>Newsletter</h4>
-        <p>Get the latest romance recommendations delivered to your inbox</p>
+        <p style="color: white;">Get the latest romance recommendations delivered to your inbox</p>
         <form class="newsletter-form" @submit.prevent="subscribeNewsletter">
           <input type="email" placeholder="Enter your email" v-model="email" required />
-          <button type="submit">💌 Subscribe</button>
+          <button type="submit">Subscribe</button>
         </form>
       </div>
     </div>
@@ -151,7 +151,7 @@ function openNewReleases() {
 
 <style scoped>
 .footer {
-  background: linear-gradient(135deg, #be123c, #e11d48);
+  background: linear-gradient(135deg, #ffffff,#966AEC, #966AEC);
   color: white;
   margin-top: auto;
 }
