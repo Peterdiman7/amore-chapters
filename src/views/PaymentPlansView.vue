@@ -36,6 +36,10 @@
 </template>
 
 <script setup lang="ts">
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
 const plans = [
   {
     id: 1,
@@ -114,8 +118,8 @@ const plans = [
   }
 ]
 
-function selectPlan(plan) {
-  alert(`You're starting the ${plan.name} plan at $${plan.price}! 💖`)
+const selectPlan = (plan) => {
+  router.push({ name: "checkout", query: { plan: plan.id } })
 }
 </script>
 
