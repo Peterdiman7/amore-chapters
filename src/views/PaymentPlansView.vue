@@ -6,7 +6,7 @@
           <div class="col-lg-8 offset-lg-2">
             <div class="section-heading">
               <h4 style="color: #966AEC !important;">Choose Your Perfect Reading Plan</h4>
-              <img src="/assets/images/heading-line-dec.png" alt="divider" />
+              <img style="width: 50px; height: auto;" src="/assets/images/recommendation.png" alt="divider" />
               <p>Find a plan that matches your passion for romance. Cancel anytime.</p>
             </div>
           </div>
@@ -14,21 +14,29 @@
           <!-- Pricing Cards -->
           <div v-for="plan in plans" :key="plan.id" class="col-lg-4">
             <div :class="['pricing-item', plan.featured ? 'pricing-item-pro' : 'pricing-item-regular']">
-              <span class="price">${{ plan.price }}</span>
+
+              <span class="price">{{ plan.price }}</span>
+
               <div class="icon">
                 <img :src="plan.image" :alt="plan.name" />
                 <h4>{{ plan.name }}</h4>
               </div>
-              <ul>
+
+              <ul v-if="plan.features">
                 <li v-for="feature in plan.features" :key="feature">
                   {{ feature }}
                 </li>
               </ul>
+
               <div class="border-button">
-                <button @click="selectPlan(plan)">{{ plan.buttonText }}</button>
+                <button @click="selectPlan(plan)">
+                  {{ plan.buttonText }}
+                </button>
               </div>
+
             </div>
           </div>
+
         </div>
       </div>
     </section>
@@ -36,11 +44,141 @@
 </template>
 
 <script setup lang="ts">
-const plans = [
+import { computed } from "vue"
+import { useRouter } from "vue-router"
+
+const router = useRouter()
+
+// ✅ Local Country Pricing
+const localPricing: Record<string, any> = {
+  ku: [
+    {
+      id: 101,
+      name: "Daily Access",
+      price: "0.100 KWD",
+      image: "/assets/images/slider-dec.webp",
+      buttonText: "Subscribe",
+      featured: false,
+      features: [
+        "Unlimited Reading Access",
+        "Works on Mobile and Web",
+        "Basic Support"
+      ]
+    },
+    {
+      id: 102,
+      name: "Weekly Access",
+      price: "0.700 KWD",
+      image: "/assets/images/collection.png",
+      buttonText: "Subscribe",
+      featured: true,
+      features: [
+        "Unlimited Reading Access",
+        "Offline Reading",
+        "Early Access to New Chapters",
+        "Priority Support"
+      ]
+    }
+  ],
+
+  ksa: [
+    {
+      id: 201,
+      name: "Daily Access",
+      price: "1.50 SAR",
+      image: "/assets/images/slider-dec.webp",
+      buttonText: "Subscribe",
+      featured: false,
+      features: [
+        "Unlimited Reading Access",
+        "Works on All Devices",
+        "Basic Support"
+      ]
+    }
+  ],
+
+  iq: [
+    {
+      id: 301,
+      name: "Daily Access",
+      price: "0.240 IQD",
+      image: "/assets/images/pricing-table-01.png",
+      buttonText: "Subscribe",
+      featured: false,
+      features: [
+        "Unlimited Reading Access",
+        "Daily Updates",
+        "Supports 1 Device"
+      ]
+    },
+    {
+      id: 302,
+      name: "Weekly Access",
+      price: "0.700 IQD",
+      image: "/assets/images/collection.png",
+      buttonText: "Subscribe",
+      featured: true,
+      features: [
+        "Unlimited Reading Access",
+        "Offline Reading",
+        "Early Access to Upcoming Releases",
+        "Support on Multiple Devices"
+      ]
+    }
+  ],
+
+  su: [
+    {
+      id: 401,
+      name: "Daily Access",
+      price: "600 SDP",
+      image: "/assets/images/slider-dec.webp",
+      buttonText: "Subscribe",
+      featured: false,
+      features: [
+        "Unlimited Reading Access",
+        "1 Device Access",
+        "Basic Support"
+      ]
+    },
+    {
+      id: 402,
+      name: "Weekly Access",
+      price: "1500 SDP",
+      image: "/assets/images/pricing-table-01.png",
+      buttonText: "Subscribe",
+      featured: true,
+      features: [
+        "Unlimited Reading Access",
+        "Offline Reading",
+        "Priority Support",
+        "Exclusive Access to New Stories"
+      ]
+    },
+    {
+      id: 403,
+      name: "Monthly Access",
+      price: "3600 SDP",
+      image: "/assets/images/collection.png",
+      buttonText: "Subscribe",
+      featured: true,
+      features: [
+        "Unlimited Reading Access",
+        "Offline Reading",
+        "Access on Multiple Devices",
+        "VIP Support",
+        "Early Access to Premium Stories"
+      ]
+    }
+  ]
+}
+
+// ✅ Default Global Pricing (your original)
+const globalPricing = [
   {
     id: 1,
     name: "Casual Reader",
-    price: 1.99,
+    price: "$1.99",
     image: "/assets/images/slider-dec.webp",
     buttonText: "Choose This Plan",
     featured: false,
@@ -48,13 +186,13 @@ const plans = [
       "5 Books per Month",
       "Basic Recommendations",
       "Standard Support",
-      "Access on 1 Device"
-    ]
+      "Access on 1 Device",
+    ],
   },
   {
     id: 2,
     name: "Love Enthusiast",
-    price: 9.99,
+    price: "$9.99",
     image: "/assets/images/slider-dec.webp",
     buttonText: "Choose This Plan",
     featured: true,
@@ -63,13 +201,13 @@ const plans = [
       "AI Recommendations",
       "Offline Reading",
       "Early Access to New Releases",
-      "Priority Support"
-    ]
+      "Priority Support",
+    ],
   },
   {
     id: 3,
     name: "Romance Addict",
-    price: 19.99,
+    price: "$19.99",
     image: "/assets/images/pricing-table-01.png",
     buttonText: "Choose This Plan",
     featured: false,
@@ -79,45 +217,28 @@ const plans = [
       "Offline Reading",
       "Premium Support",
       "Author Q&A Sessions",
-      "Exclusive Early Access"
-    ]
+      "Exclusive Early Access",
+    ],
   },
-  {
-    id: 4,
-    name: "Annual Lover",
-    price: 199.99,
-    image: "/assets/images/collection.png",
-    buttonText: "Save with Annual Plan",
-    featured: false,
-    features: [
-      "Everything in Romance Addict",
-      "2 Months Free",
-      "Exclusive Annual Perks",
-      "Collector’s Covers",
-      "Reader Awards Access"
-    ]
-  },
-  {
-    id: 5,
-    name: "Lifetime Romantic",
-    price: 499.99,
-    image: "/assets/images/24_7.png",
-    buttonText: "Go Lifetime",
-    featured: false,
-    features: [
-      "Unlimited Lifetime Access",
-      "All Future Features",
-      "VIP Author Events",
-      "Collector’s Signed Editions",
-      "Lifetime Premium Support"
-    ]
-  }
 ]
 
-function selectPlan(plan) {
-  alert(`You're starting the ${plan.name} plan at $${plan.price}! 💖`)
+// ✅ Determine pricing based on hostname
+const subdomain = window.location.hostname.split(".")[0]
+const isLocal = ["ku", "ksa", "iq", "su"].includes(subdomain)
+
+const plans = computed(() =>
+  isLocal ? localPricing[subdomain] : globalPricing
+)
+
+// ✅ Send selected plan + region to checkout
+const selectPlan = (plan: any) => {
+  router.push({
+    name: "checkout",
+    query: { plan: plan.id, region: isLocal ? subdomain : "global" },
+  })
 }
 </script>
+
 
 <style scoped>
 .pricing-tables {
@@ -142,6 +263,8 @@ function selectPlan(plan) {
 .section-heading img {
   margin: 1rem 0;
 }
+
+
 
 .pricing-item-regular,
 .pricing-item-pro {
@@ -168,7 +291,7 @@ function selectPlan(plan) {
   display: inline-block;
   font-size: 2rem;
   font-weight: bold;
-  color: #be123c;
+  color: #be123c !important;
   margin-bottom: 0.5rem;
 }
 
@@ -179,6 +302,7 @@ h4 {
 }
 
 .icon img {
+  padding-top: 4rem;
   width: 60px;
   margin-bottom: 1.5rem;
 }

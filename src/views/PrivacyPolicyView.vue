@@ -13,8 +13,7 @@
                     transparently.
                 </p>
                 <p>
-                    Email: <a href="mailto:privacy@amorechapters.com">privacy@amorechapters.com</a><br />
-                    Support: <a href="mailto:support@amorechapters.com">support@amorechapters.com</a><br />
+                    Email: <a href="mailto:info@amore-chapters.com">info@amore-chapters.com</a><br />
                     Phone: +1-747-250-0014
                 </p>
 
@@ -101,7 +100,7 @@
                 <h3>10) Contact Us</h3>
                 <p>
                     For privacy-related questions or requests, contact us at:
-                    <a href="mailto:privacy@amorechapters.com">privacy@amorechapters.com</a>
+                    <a href="mailto:help@amore-chapters.com">help@amore-chapters.com</a>
                 </p>
             </div>
         </div>

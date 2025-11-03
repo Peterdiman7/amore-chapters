@@ -11,7 +11,7 @@
         <p>
           <strong>Amore Chapters</strong> provides a curated collection of romance books, stories, and exclusive content
           for our community of readers. All content is for personal enjoyment and entertainment.
-          Contact us at <a href="mailto:legal@amorechapters.com">legal@amorechapters.com</a>.
+          Contact us at <a href="mailto:info@amorechapters.com">info@amorechapters.com</a>.
         </p>
 
         <h3>2. Acceptance of Terms</h3>

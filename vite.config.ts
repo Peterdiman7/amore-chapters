@@ -17,6 +17,19 @@ export default defineConfig({
     port: 9000,
     allowedHosts: [
       'amore-chapters.com',
+      'ku.amore-chapters.com',
+      'ksa.amore-chapters.com',
+      'iq.amore-chapters.com',
+      'su.amore-chapters.com',
+    ],
+  },
+  preview: {
+    allowedHosts: [
+      'amore-chapters.com',
+      'ku.amore-chapters.com',
+      'ksa.amore-chapters.com',
+      'iq.amore-chapters.com',
+      'su.amore-chapters.com',
     ],
   },
 })

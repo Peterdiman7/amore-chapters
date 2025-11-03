@@ -1,5 +1,6 @@
 import CancelSubscriptionView from "@/views/CancelSubscriptionView.vue"
 import CategoriesView from "@/views/CategoriesView.vue"
+import CheckoutView from "@/views/CheckoutView.vue"
 import ContactsView from "@/views/ContactsView.vue"
 import GenreBooksView from "@/views/GenreBooksView.vue"
 import LandingPageView from "@/views/LandingPageView.vue"
@@ -46,6 +47,12 @@ const createRouter = () => {
                 path: "/plans",
                 name: "plans",
                 component: PaymentPlansView,
+            },
+            {
+                path: "/checkout",
+                name: "checkout",
+                component: CheckoutView,
+                meta: { requiresAuth: true },
             },
             {
                 path: "/login",

@@ -14,19 +14,23 @@ const app = express()
 // ---- CORS configuration ----
 const allowedOrigins = [
     "https://amore-chapters.com",
+    "https://ku.amore-chapters.com",
+    "https://ksa.amore-chapters.com",
+    "https://iq.amore-chapters.com",
+    "https://su.amore-chapters.com",
     "http://localhost:9000",
     "http://localhost:5173"
 ]
 
 app.use(cors({
     origin: function (origin, callback) {
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, origin)
-        } else {
-            callback(new Error("Not allowed by CORS"))
-        }
+        if (!origin) return callback(null, true) // allow server-side requests
+        const allowedBase = "amore-chapters.com"
+        if (origin.endsWith(allowedBase)) return callback(null, true)
+        return callback(new Error("Not allowed by CORS"))
     },
-    credentials: true
+    credentials: true,
+    optionsSuccessStatus: 204
 }))
 
 app.use(express.json())
