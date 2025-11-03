@@ -35,13 +35,13 @@ const createRouter = () => {
                 path: "/genre/:name",
                 name: "genre-books",
                 component: GenreBooksView,
-                meta: { requiresAuth: true },
+                // meta: { requiresAuth: true },
             },
             {
                 path: "/collection",
                 name: "collection",
                 component: MyCollectionView,
-                meta: { requiresAuth: true },
+                // meta: { requiresAuth: true },
             },
             {
                 path: "/plans",

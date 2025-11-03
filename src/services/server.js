@@ -7,31 +7,34 @@ import jwt from "jsonwebtoken"
 import cookieParser from "cookie-parser"
 import dotenv from "dotenv"
 
-dotenv.config({ path: path.resolve("/home/devalex/amore-chapters.com/amore-chapters/.env") })
+// dotenv.config({ path: path.resolve("/home/devalex/amore-chapters.com/amore-chapters/.env") })
+dotenv.config({ path: path.resolve(process.cwd(), ".env") })
 
 const app = express()
 
 // ---- CORS configuration ----
-const allowedOrigins = [
-    "https://amore-chapters.com",
-    "https://ku.amore-chapters.com",
-    "https://ksa.amore-chapters.com",
-    "https://iq.amore-chapters.com",
-    "https://su.amore-chapters.com",
-    "http://localhost:9000",
-    "http://localhost:5173"
-]
-
 app.use(cors({
     origin: function (origin, callback) {
-        if (!origin) return callback(null, true) // allow server-side requests
-        const allowedBase = "amore-chapters.com"
-        if (origin.endsWith(allowedBase)) return callback(null, true)
-        return callback(new Error("Not allowed by CORS"))
+        if (!origin) return callback(null, true)
+
+        const allowedOrigins = [
+            "http://localhost:5173",
+            "http://localhost:3000",
+            "http://localhost:9000",
+            "https://amore-chapters.com",
+            "http://amore-chapters.com"
+        ]
+
+        if (allowedOrigins.includes(origin)) {
+            return callback(null, true)
+        }
+
+        callback(new Error("Not allowed by CORS: " + origin))
     },
     credentials: true,
     optionsSuccessStatus: 204
 }))
+
 
 app.use(express.json())
 app.use(cookieParser())
@@ -40,12 +43,25 @@ app.use(cookieParser())
 const pool = mysql.createPool({
     host: process.env.DB_HOST || "127.0.0.1",
     user: process.env.DB_USER,
-    port: Number(process.env.DB_PORT) || 3306, // use 3307 only if SSH tunnel
+    port: Number(process.env.DB_PORT), // use 3307 only if SSH tunnel
     password: process.env.DB_PASS,
     database: process.env.DB_NAME,
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
+})
+
+// ---- GET CATEGORIES ----
+app.get("/categories", async (req, res) => {
+    try {
+        const [rows] = await pool.execute(
+            "SELECT id, name, image FROM categories ORDER BY id ASC"
+        )
+        res.json(rows)
+    } catch (err) {
+        console.error("GET CATEGORIES ERROR:", err)
+        res.status(500).json({ error: "Database error" })
+    }
 })
 
 // ---- JWT SECRET ----

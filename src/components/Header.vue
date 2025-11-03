@@ -1,14 +1,10 @@
 <template>
 	<header class="site-header">
 		<nav class="nav">
-			<!-- Logo -->
 			<router-link to="/" class="logo" @click="closeMenu">
 				<img src="@/assets/images/amore-chapters-logo.png" alt="Amore Chapters Logo" class="logo-icon" />
 				<span class="logo-text">Amore Chapters</span>
 			</router-link>
-
-
-			<!-- Desktop / Mobile Nav -->
 			<ul class="nav-links" :class="{ open: menuOpen }">
 				<li>
 					<router-link to="/" @click="closeMenu" class="nav-link">
@@ -30,8 +26,6 @@
 						<span class="link-icon">Plans</span>
 					</router-link>
 				</li>
-
-				<!-- Login / Logout -->
 				<li v-if="!loggedIn">
 					<router-link to="/login" @click="closeMenu" class="nav-link">
 						<span class="link-icon">Login</span>
@@ -43,8 +37,6 @@
 					</button>
 				</li>
 			</ul>
-
-			<!-- Hamburger Button -->
 			<button class="menu-toggle" @click="toggleMenu" :aria-expanded="menuOpen.toString()"
 				aria-label="Toggle menu">
 				<span :class="{ open: menuOpen }"></span>
@@ -88,7 +80,6 @@ onMounted(() => {
 </script>
 
 <style scoped>
-/* ===== Header Layout ===== */
 .site-header {
 	width: 100%;
 	background: linear-gradient(135deg, #ffffff, #966AEC, #966AEC);
@@ -108,7 +99,6 @@ onMounted(() => {
 	padding: 1rem 2rem;
 }
 
-/* ===== Logo ===== */
 .logo {
 	display: flex;
 	align-items: center;
@@ -130,7 +120,6 @@ onMounted(() => {
 	font-weight: 700;
 }
 
-/* ===== Nav Links ===== */
 .nav-links {
 	list-style: none;
 	display: flex;
@@ -159,7 +148,6 @@ onMounted(() => {
 	cursor: pointer;
 }
 
-/* ===== Hamburger Button ===== */
 .menu-toggle {
 	display: none;
 	flex-direction: column;
@@ -194,7 +182,6 @@ onMounted(() => {
 	transform: rotate(-45deg) translate(6px, -6px);
 }
 
-/* ===== Mobile Styles ===== */
 @media (max-width: 1078px) {
 	.menu-toggle {
 		display: flex;
@@ -232,7 +219,6 @@ onMounted(() => {
 	}
 }
 
-/* Extra Small Devices */
 @media (max-width: 480px) {
 	.logo-text {
 		display: none;
